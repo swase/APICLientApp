@@ -60,14 +60,82 @@ namespace APIClientApp
 
             var bulkPostCode = JsonConvert.DeserializeObject<BulkPostCodeResponse>(bulkPostcodeResponse.Content);
 
-            Console.WriteLine(singPostCode.result.country);
+            //Console.WriteLine(singPostCode.result.country);
 
-            foreach (var result in bulkPostCode.result)
-            {
-                Console.WriteLine(result.query);
-                Console.WriteLine(result.postCode.region);
-            }
+            //foreach (var result in bulkPostCode.result)
+            //{
+            //    Console.WriteLine(result.query);
+            //    Console.WriteLine(result.postCode.region);
+            //}
             var result2 = bulkPostCode.result.Where(p => p.query == "OX49 5NU").Select(p => p.postCode.parish).FirstOrDefault();
+
+            var regionQueryPostCodes = bulkPostCode.result.Where(p => p.postCode.region == "North East").Select(p => p.query).FirstOrDefault();
+            Console.WriteLine(regionQueryPostCodes);
+
+            var totalPostCodes = bulkPostCode.result.Count();
+            Console.WriteLine(totalPostCodes);
+
+            //// Query for european_electoral_region
+            var euroElectoralRegion =
+                bulkPostCode.result.Select(r => new
+                {
+                    r.query,
+                    r.postCode.european_electoral_region
+                }
+                );
+
+            Console.WriteLine("\nEuropean Electoral Region:\n");
+            foreach(var result in euroElectoralRegion)
+            {
+                Console.WriteLine($"Postcode: {result.query}, European Electoral Region: {result.european_electoral_region}");
+            }
+
+            //// Query for Parlimentary Constituency ////
+            var parlimentConstituency =
+                bulkPostCode.result.Select(r => new
+                {
+                    r.query,
+                    r.postCode.parliamentary_constituency
+                }
+                );
+            Console.WriteLine("\nConstituency:\n");
+
+            foreach (var result in parlimentConstituency)
+            {
+                Console.WriteLine($"Postcode: {result.query}, Parliamentary Constituency : {result.parliamentary_constituency}");
+            }
+
+            //// Query for longitude, latitude ////
+            var coords =
+                bulkPostCode.result.Select(r => new
+                {
+                    r.query,
+                    r.postCode.latitude,
+                    r.postCode.longitude
+                }
+                );
+            Console.WriteLine("\nCoordinates:\n");
+
+            foreach (var result in coords)
+            {
+                Console.WriteLine($"Postcode: {result.query}, latitude : {result.latitude}, longitude: {result.longitude}");
+            }
+
+
+            //// Query for north regions ////
+            var northRegions =
+                bulkPostCode.result.Where(p => p.postCode.region.Contains("North")).Select(r => new
+                {
+                    r.query,
+                    r.postCode.region,
+                }
+                );
+            Console.WriteLine("\nNorthRegions:\n");
+
+            foreach (var result in northRegions)
+            {
+                Console.WriteLine($"Postcode: {result.query}, region : {result.region}");
+            }
 
 
         }

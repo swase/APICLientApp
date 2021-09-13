@@ -43,7 +43,7 @@ namespace APIClientApp
         public float latitude { get; set; }
         public string european_electoral_region { get; set; }
         public string primary_care_trust { get; set; }
-        public object region { get; set; }
+        public string region { get; set; }
         public string lsoa { get; set; }
         public string msoa { get; set; }
         public string incode { get; set; }
