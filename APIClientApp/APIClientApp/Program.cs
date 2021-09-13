@@ -56,9 +56,9 @@ namespace APIClientApp
             //Console.WriteLine(singleJsonResponse["result"]["parish"]);
             //Console.WriteLine(bulkJsonResponse["result"][1]["result"]["country"]);
 
-            var singPostCode = JsonConvert.DeserializeObject<SinglePostCodeResponse>(singlePostcodeResponse.Content);
+            var singPostCode = JsonConvert.DeserializeObject<SinglePostcodeResponse>(singlePostcodeResponse.Content);
 
-            var bulkPostCode = JsonConvert.DeserializeObject<BulkPostCodeResponse>(bulkPostcodeResponse.Content);
+            var bulkPostCode = JsonConvert.DeserializeObject<BulkPostcodeResponse>(bulkPostcodeResponse.Content);
 
             //Console.WriteLine(singPostCode.result.country);
 
@@ -67,9 +67,9 @@ namespace APIClientApp
             //    Console.WriteLine(result.query);
             //    Console.WriteLine(result.postCode.region);
             //}
-            var result2 = bulkPostCode.result.Where(p => p.query == "OX49 5NU").Select(p => p.postCode.parish).FirstOrDefault();
+            var result2 = bulkPostCode.result.Where(p => p.query == "OX49 5NU").Select(p => p.postcode.parish).FirstOrDefault();
 
-            var regionQueryPostCodes = bulkPostCode.result.Where(p => p.postCode.region == "North East").Select(p => p.query).FirstOrDefault();
+            var regionQueryPostCodes = bulkPostCode.result.Where(p => p.postcode.region == "North East").Select(p => p.query).FirstOrDefault();
             Console.WriteLine(regionQueryPostCodes);
 
             var totalPostCodes = bulkPostCode.result.Count();
@@ -80,7 +80,7 @@ namespace APIClientApp
                 bulkPostCode.result.Select(r => new
                 {
                     r.query,
-                    r.postCode.european_electoral_region
+                    r.postcode.european_electoral_region
                 }
                 );
 
@@ -95,7 +95,7 @@ namespace APIClientApp
                 bulkPostCode.result.Select(r => new
                 {
                     r.query,
-                    r.postCode.parliamentary_constituency
+                    r.postcode.parliamentary_constituency
                 }
                 );
             Console.WriteLine("\nConstituency:\n");
@@ -110,8 +110,8 @@ namespace APIClientApp
                 bulkPostCode.result.Select(r => new
                 {
                     r.query,
-                    r.postCode.latitude,
-                    r.postCode.longitude
+                    r.postcode.latitude,
+                    r.postcode.longitude
                 }
                 );
             Console.WriteLine("\nCoordinates:\n");
@@ -124,10 +124,10 @@ namespace APIClientApp
 
             //// Query for north regions ////
             var northRegions =
-                bulkPostCode.result.Where(p => p.postCode.region.Contains("North")).Select(r => new
+                bulkPostCode.result.Where(p => p.postcode.region.Contains("North")).Select(r => new
                 {
                     r.query,
-                    r.postCode.region,
+                    r.postcode.region,
                 }
                 );
             Console.WriteLine("\nNorthRegions:\n");
