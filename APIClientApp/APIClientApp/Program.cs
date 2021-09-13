@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Linq;
+using APITestApp;
 
 namespace APIClientApp
 {
@@ -67,9 +68,9 @@ namespace APIClientApp
             //    Console.WriteLine(result.query);
             //    Console.WriteLine(result.postCode.region);
             //}
-            var result2 = bulkPostCode.result.Where(p => p.query == "OX49 5NU").Select(p => p.postcode.parish).FirstOrDefault();
+            var result2 = bulkPostCode.result.Where(p => p.query == "OX49 5NU").Select(p => p.result.parish).FirstOrDefault();
 
-            var regionQueryPostCodes = bulkPostCode.result.Where(p => p.postcode.region == "North East").Select(p => p.query).FirstOrDefault();
+            var regionQueryPostCodes = bulkPostCode.result.Where(p => p.result.region == "North East").Select(p => p.query).FirstOrDefault();
             Console.WriteLine(regionQueryPostCodes);
 
             var totalPostCodes = bulkPostCode.result.Count();
@@ -80,7 +81,7 @@ namespace APIClientApp
                 bulkPostCode.result.Select(r => new
                 {
                     r.query,
-                    r.postcode.european_electoral_region
+                    r.result.european_electoral_region
                 }
                 );
 
@@ -95,7 +96,7 @@ namespace APIClientApp
                 bulkPostCode.result.Select(r => new
                 {
                     r.query,
-                    r.postcode.parliamentary_constituency
+                    r.result.parliamentary_constituency
                 }
                 );
             Console.WriteLine("\nConstituency:\n");
@@ -110,8 +111,8 @@ namespace APIClientApp
                 bulkPostCode.result.Select(r => new
                 {
                     r.query,
-                    r.postcode.latitude,
-                    r.postcode.longitude
+                    r.result.latitude,
+                    r.result.longitude
                 }
                 );
             Console.WriteLine("\nCoordinates:\n");
@@ -124,10 +125,10 @@ namespace APIClientApp
 
             //// Query for north regions ////
             var northRegions =
-                bulkPostCode.result.Where(p => p.postcode.region.Contains("North")).Select(r => new
+                bulkPostCode.result.Where(p => p.result.region.Contains("North")).Select(r => new
                 {
                     r.query,
-                    r.postcode.region,
+                    r.result.region,
                 }
                 );
             Console.WriteLine("\nNorthRegions:\n");
