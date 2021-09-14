@@ -77,9 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigReader.cs" />
-    <Compile Include="Model.cs" />
-    <Compile Include="Services\BulkPostcodeService.cs" />
-    <Compile Include="Services\SinglePostcodeService.cs" />
+    <Compile Include="PostcodeIOService\DataHandling\DTO.cs" />
+    <Compile Include="PostcodeIOService\DataHandling\IResponse.cs" />
+    <Compile Include="PostcodeIOService\DataHandling\Model.cs" />
+    <Compile Include="PostcodeIOService\BulkPostcodeService.cs" />
+    <Compile Include="PostcodeIOService\HTTPManager\CallManager.cs" />
+    <Compile Include="PostcodeIOService\SinglePostcodeService.cs" />
     <Compile Include="Tests\WhenBulkPostcodeServiceIsCalled_WithValidPostCodes.cs" />
     <Compile Include="Tests\WhenTheSinglePoscodeServiceIsCalled_WithValidPostcode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

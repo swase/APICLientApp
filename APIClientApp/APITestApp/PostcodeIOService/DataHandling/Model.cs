@@ -1,20 +1,21 @@
-﻿using Newtonsoft.Json;
+﻿using APITestApp.PostcodeIOService;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APITestApp
+namespace APITestApp.PostcodeIOSerice
 {
-    public class SinglePostcodeResponse
+    public class SinglePostcodeResponse :IResponse
     {
         [JsonProperty("status")]
         public int Status { get; set; }
         public Postcode result { get; set; }
     }
 
-    public class BulkPostcodeResponse
+    public class BulkPostcodeResponse : IResponse
     {
         public int status { get; set; }
         public Result[] @result { get; set; }
